@@ -1,4 +1,4 @@
-﻿using System.Runtime.InteropServices;
+using System.Runtime.InteropServices;
 
 namespace Walterlv.Issues.TraceBreakpointTrap.Native;
 
@@ -20,6 +20,9 @@ public static class Linux
 
     [DllImport("libpulse.so.0")]
     public static extern int pa_context_connect(nint c, nint server, uint flags, nint api);
+
+    [DllImport("libpulse.so.0")]
+    public static extern int pa_context_disconnect(nint c);
 
     [DllImport("libpulse.so.0")]
     public static extern int pa_threaded_mainloop_start(nint m);

@@ -1,4 +1,4 @@
-﻿using static Walterlv.Issues.TraceBreakpointTrap.Native.Linux;
+using static Walterlv.Issues.TraceBreakpointTrap.Native.Linux;
 
 namespace Walterlv.Issues.TraceBreakpointTrap;
 
@@ -45,9 +45,20 @@ public class VolumeManager
         {
             return;
         }
+
+        DebuggingHelper.AttachDebugger([]); // Callback has already been called at least once.
+
+        result = pa_context_disconnect(context);
+        if (result < 0)
+        {
+            return;
+        }
     }
+
+    private static uint count = 0;
 
     private void ContextStateCallback(IntPtr c, IntPtr userdata)
     {
+        Console.WriteLine($"Context state changed: {++count}");
     }
 }
